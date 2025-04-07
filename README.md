@@ -2,7 +2,7 @@
 
 A modern, responsive React application for freelancers to manage their profile and bid on projects. Built with React, TypeScript, Tailwind CSS, and Framer Motion.
 
-![Dark Mode Support](https://drive.google.com/file/d/1jSrJ6HddMF8M8wVnYBBFzHrO9-7Uyeoc/view?usp=sharing)
+
 
 ## 🚀 Features
 

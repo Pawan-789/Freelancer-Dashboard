@@ -11,16 +11,22 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, onBid, existingBid }: ProjectCardProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
     onBid({
       projectId: project.id,
       amount: Number(formData.get('amount')),
       timeline: Number(formData.get('timeline')),
       proposal: formData.get('proposal') as string,
     });
-    e.currentTarget.reset();
+    //reset
+    form.reset();
+    setTimeout(() => {
+      if (form.querySelector('input')) (form.querySelector('input') as HTMLInputElement).blur();
+    }, 0);
   };
-
+  
   const getBidStatusIcon = () => {
     if (!existingBid) return null;
     switch (existingBid.status) {

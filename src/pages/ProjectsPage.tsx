@@ -13,7 +13,7 @@ export default function ProjectsPage() {
 
   const handleBid = (newBid: Omit<Bid, 'status'>) => {
     const bid: Bid = { ...newBid, status: 'pending' };
-    setBids([...bids, bid]);
+    setBids(prevBids => [...prevBids.filter(b => b.projectId !== newBid.projectId), bid]);
   };
 
   return (
