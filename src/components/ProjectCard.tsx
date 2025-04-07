@@ -13,19 +13,27 @@ export default function ProjectCard({ project, onBid, existingBid }: ProjectCard
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
-    
-    onBid({
+  
+    const bid = {
       projectId: project.id,
       amount: Number(formData.get('amount')),
       timeline: Number(formData.get('timeline')),
       proposal: formData.get('proposal') as string,
-    });
-    //reset
+    };
+  
+    onBid(bid);
+  
+    const storedBids = JSON.parse(localStorage.getItem('bids') || '{}');
+    delete storedBids[project.id];
+    localStorage.setItem('bids', JSON.stringify(storedBids));
+  
     form.reset();
     setTimeout(() => {
-      if (form.querySelector('input')) (form.querySelector('input') as HTMLInputElement).blur();
+      const input = form.querySelector('input');
+      if (input) (input as HTMLInputElement).blur();
     }, 0);
   };
+  
   
   const getBidStatusIcon = () => {
     if (!existingBid) return null;
